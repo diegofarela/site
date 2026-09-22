@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("portfolioThemeModeV1") || "auto";
+          if (mode === "light" || mode === "dark") {
+            document.documentElement.dataset.theme = mode;
+            return;
+          }
+          var tz = localStorage.getItem("portfolioHeroTzV1") || "local";
+          var h;
+          if (!tz || tz === "local") {
+            var d = new Date();
+            h = d.getHours() + d.getMinutes() / 60;
+          } else {
+            try {
+              var parts = new Intl.DateTimeFormat("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hourCycle: "h23",
+                timeZone: tz
+              }).formatToParts(new Date());
+              var hour = Number(parts.find(function (p) { return p.type === "hour"; }).value);
+              var minute = Number(parts.find(function (p) { return p.type === "minute"; }).value);
+              h = (hour === 24 ? 0 : hour) + minute / 60;
+            } catch (err) {
+              var d2 = new Date();
+              h = d2.getHours() + d2.getMinutes() / 60;
+            }
+          }
+          document.documentElement.dataset.theme = h >= 4.5 && h < 17 ? "light" : "dark";
+        } catch (err) {}
+      })();
+    </script>
+    <title>How I Think — Diego Martinez</title>
+    <meta
+      name="description"
+      content="How Diego Martinez thinks about people, systems, and code: customer service instincts, psychology, and shipping software that holds up under real use."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How I Think — Diego Martinez" />
+    <meta
+      property="og:description"
+      content="Customer service instincts, psychology, and shipping software that holds up under real use."
+    />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How I Think — Diego Martinez" />
+    <meta
+      name="twitter:description"
+      content="Customer service instincts, psychology, and shipping software that holds up under real use."
+    />
+    <meta name="twitter:image" content="assets/og-image.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=49" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Diego Martinez
+          <span class="brand-role">Ops software · automation · integrations</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Work</a>
+          <a href="resume.html">Resume</a>
+          <a href="approach.html" aria-current="page">How I Think</a>
+          <a class="nav-cta" href="contact.html">Contact</a>
+          <label class="theme-control">
+            <span class="sr-only">Theme</span>
+            <select id="theme-mode" aria-label="Color theme">
+              <option value="auto">Dark/Light Mode</option>
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </label>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <span class="eyebrow">How I Think</span>
+          <h1>I don’t blame the user. I fix the tool.</h1>
+          <p>
+            Years in customer service. Training in psychology. A career shipping tools busy people use every day. Same habit: listen hard, design for real life, and don’t leave anyone stuck.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-col">
+          <div class="reveal">
+            <span class="eyebrow">Where it started</span>
+            <h2 class="section-title">Customer service is not a soft skill on my resume</h2>
+            <p class="section-lead">
+              Years of it taught me how to talk to stakeholders without jargon, pull the real need out of a messy request, and stay calm when something’s on fire. That muscle still runs every build I own.
+            </p>
+          </div>
+          <ul class="principle-list reveal">
+            <li>I hear what people need—not just what they asked for</li>
+            <li>I translate between admins, advisors, engineers, and end users</li>
+            <li>“No user left behind” means the tool has to work for the tired person on a phone, not only the power user</li>
+            <li>I take projects when there’s time, space, and a net win for everyone involved</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="how-i-build">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">How I build</span>
+            <h2 class="section-title">Safety and simplicity first. Clever second—if ever.</h2>
+            <p class="section-lead">
+              I design. Tools (including AI) write the boring parts. My job is keeping us on the right path: if a change drifts us off, we roll back to the last good version and try again.
+            </p>
+          </div>
+          <div class="topic-grid">
+            <article class="topic reveal">
+              <h3>Start small. Ship. Then grow.</h3>
+              <p>MVP first. Add one feature at a time. Measure what’s used before optimizing anything.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Build in layers</h3>
+              <p>Presentation, infrastructure, shared pieces. Each layer should stand alone so the next phase doesn’t force a rewrite.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Readable beats clever</h3>
+              <p>Code is for humans first. Short functions. One job each. Human time costs more than CPU cycles.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Plan for failure</h3>
+              <p>Things break. Logging, alerts, and clear ownership tell you where—before users do. Assume logs can leak; don’t put secrets in them.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Everything is a pipe</h3>
+              <p>Input → transform → output. Reusable pieces. Freeze the predictable building blocks before stacking higher-level work on top.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Leave it cleaner</h3>
+              <p>Boy Scout rule: every pass should make the system a little easier to debug than you found it.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-i-think">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Psychology</span>
+            <h2 class="section-title">Data is about people. Even when it isn’t, it still hits them.</h2>
+            <p class="section-lead">
+              I studied psychology because I care how we decide and why we act. Once I started building software, that curiosity became a practical edge: design for bias, fatigue, and handoffs—not ideal users who read every label.
+            </p>
+          </div>
+          <div class="topic-grid">
+            <article class="topic reveal">
+              <h3>Don’t trust the pretty chart</h3>
+              <p>Cognitive bias loves dashboards. I pressure-test the story the numbers want to tell—including my own.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Make it teachable</h3>
+              <p>Plain language, chunking, clear cues. If only one person can run it, it isn’t done.</p>
+            </article>
+            <article class="topic reveal">
+              <h3>Edge cases are people</h3>
+              <p>The new hire, the phone-only admin, the record the form forgot. Empathy isn’t a slogan—it’s a design constraint.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-sea">
+        <div class="container reveal">
+          <span class="eyebrow" style="color: var(--signal-soft)">How I show up</span>
+          <h2 class="section-title">Own it. Say the hard thing. Keep sharpening.</h2>
+          <div class="two-col" style="margin-top: 1.5rem">
+            <ul class="principle-list">
+              <li style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88); border-left-color: var(--signal)">I take initiative—and I own the outcome after launch</li>
+              <li style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88); border-left-color: var(--signal)">Hard calls come with options and tradeoffs, not surprises</li>
+              <li style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88); border-left-color: var(--signal)">I respond. No chasing required.</li>
+            </ul>
+            <ul class="principle-list">
+              <li style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88); border-left-color: var(--signal)">Working versions get replaced when flexibility matters more</li>
+              <li style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88); border-left-color: var(--signal)">Ideas are cheap. Shipping them is the scarce part.</li>
+              <li style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.88); border-left-color: var(--signal)">I often design, build, test, and launch alone—on a deadline</li>
+            </ul>
+          </div>
+          <p class="section-lead" style="margin-top: 2rem">
+            Some tools got rebuilt two or three times after they already worked—because “works” wasn’t flexible enough for the real job. That’s why the portfolio is full: I keep going until the tool fits the people who use it.
+          </p>
+          <p class="btn-row" style="margin-top: 2rem">
+            <a class="btn btn-primary" href="contact.html">Email me the role</a>
+            <a class="btn btn-ghost" href="portfolio.html" style="border-color: rgba(255,255,255,0.4); color: #fff">See the work</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Diego Martinez</span>
+        <div class="footer-links">
+          <a href="portfolio.html">Work</a>
+          <a href="contact.html">Contact</a>
+          <button type="button" class="share-site" data-share-site>Share this site</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/env.js?v=1"></script>
+    <script src="js/main.js?v=38"></script>
+  </body>
+</html>

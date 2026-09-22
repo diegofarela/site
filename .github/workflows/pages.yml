@@ -1,0 +1,72 @@
+# Deploy the static site to GitHub Pages.
+# Public origin is NOT hardcoded: configure-pages reports the Pages URL
+# (project site, user site, or custom domain). Optional override: repo
+# variable SITE_ORIGIN (Settings → Secrets and variables → Actions → Variables).
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Assemble public site
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp index.html portfolio.html resume.html approach.html contact.html psychology.html dist/
+          cp -R css js assets dist/
+          touch dist/.nojekyll
+
+      - name: Disable dev tools for production
+        env:
+          PORTFOLIO_DEV_TOOLS: "false"
+        run: |
+          set -euo pipefail
+          node scripts/inject-env.js dist
+
+      - name: Inject absolute site origin
+        env:
+          PAGES_URL: ${{ steps.pages.outputs.base_url }}
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+        run: |
+          set -euo pipefail
+          ORIGIN="${SITE_ORIGIN:-$PAGES_URL}"
+          if [ -z "$ORIGIN" ]; then
+            echo "No site origin. Enable GitHub Pages or set repository variable SITE_ORIGIN." >&2
+            exit 1
+          fi
+          echo "Using public origin: $ORIGIN"
+          node scripts/inject-site-origin.js "$ORIGIN" dist
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

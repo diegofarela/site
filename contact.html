@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("portfolioThemeModeV1") || "auto";
+          if (mode === "light" || mode === "dark") {
+            document.documentElement.dataset.theme = mode;
+            return;
+          }
+          var tz = localStorage.getItem("portfolioHeroTzV1") || "local";
+          var h;
+          if (!tz || tz === "local") {
+            var d = new Date();
+            h = d.getHours() + d.getMinutes() / 60;
+          } else {
+            try {
+              var parts = new Intl.DateTimeFormat("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hourCycle: "h23",
+                timeZone: tz
+              }).formatToParts(new Date());
+              var hour = Number(parts.find(function (p) { return p.type === "hour"; }).value);
+              var minute = Number(parts.find(function (p) { return p.type === "minute"; }).value);
+              h = (hour === 24 ? 0 : hour) + minute / 60;
+            } catch (err) {
+              var d2 = new Date();
+              h = d2.getHours() + d2.getMinutes() / 60;
+            }
+          }
+          document.documentElement.dataset.theme = h >= 4.5 && h < 17 ? "light" : "dark";
+        } catch (err) {}
+      })();
+    </script>
+    <title>Contact Diego Martinez — Hire for ops systems</title>
+    <meta
+      name="description"
+      content="Email Diego Martinez about a role or broken workflow. Automation, integrations, ops systems. 40+ production systems. Remote. Full-time or contract."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contact Diego Martinez — Hire for ops systems" />
+    <meta
+      property="og:description"
+      content="Email Diego about a role or broken workflow. Automation, integrations, ops systems. 40+ production systems. Remote. Full-time or contract."
+    />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contact Diego Martinez — Hire for ops systems" />
+    <meta
+      name="twitter:description"
+      content="Email Diego about a role or broken workflow. Automation, integrations, ops systems. 40+ production systems. Remote. Full-time or contract."
+    />
+    <meta name="twitter:image" content="assets/og-image.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=49" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Diego Martinez
+          <span class="brand-role">Ops software · automation · integrations</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Work</a>
+          <a href="resume.html">Resume</a>
+          <a href="approach.html">How I Think</a>
+          <a class="nav-cta" href="contact.html" aria-current="page">Contact</a>
+          <label class="theme-control">
+            <span class="sr-only">Theme</span>
+            <select id="theme-mode" aria-label="Color theme">
+              <option value="auto">Dark/Light Mode</option>
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </label>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="contact-stage">
+        <div class="contact-stage-media">
+          <img
+            src="assets/diego-portrait.jpg"
+            alt="Diego Martinez"
+            width="1400"
+            height="1530"
+            decoding="async"
+          />
+          <div class="contact-stage-veil" aria-hidden="true"></div>
+        </div>
+        <div class="contact-stage-panel">
+          <div class="contact-copy">
+            <span class="eyebrow">Contact</span>
+            <h1>Email me the role—or the workflow that’s stuck</h1>
+            <p>Remote · full-time or contract.</p>
+            <a
+              class="btn btn-primary contact-primary"
+              href="mailto:diegofarela11@gmail.com?subject=Role%20or%20workflow%20%E2%80%94%20Diego%20Martinez&body=Role%20or%20problem%3A%0A%0ATools%20in%20play%3A%0A%0ATimeline%20%2F%20urgency%3A%0A%0ARemote%20%2F%20location%20notes%3A%0A"
+            >
+              Email Diego now
+            </a>
+            <p class="contact-links">
+              <a href="tel:+15302207907">(530) 220-7907</a>
+              <span aria-hidden="true">·</span>
+              <a href="https://www.linkedin.com/in/diego-martinez-9a47701b2/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <span aria-hidden="true">·</span>
+              <a href="assets/Diego_Martinez_Resume.pdf" download>Resume PDF</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Diego Martinez</span>
+        <div class="footer-links">
+          <a href="portfolio.html">Work</a>
+          <a href="resume.html">Resume</a>
+          <button type="button" class="share-site" data-share-site>Share this site</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/env.js?v=1"></script>
+    <script src="js/main.js?v=38"></script>
+  </body>
+</html>

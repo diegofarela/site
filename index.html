@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("portfolioThemeModeV1") || "auto";
+          if (mode === "light" || mode === "dark") {
+            document.documentElement.dataset.theme = mode;
+            return;
+          }
+          var tz = localStorage.getItem("portfolioHeroTzV1") || "local";
+          var h;
+          if (!tz || tz === "local") {
+            var d = new Date();
+            h = d.getHours() + d.getMinutes() / 60;
+          } else {
+            try {
+              var parts = new Intl.DateTimeFormat("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hourCycle: "h23",
+                timeZone: tz
+              }).formatToParts(new Date());
+              var hour = Number(parts.find(function (p) { return p.type === "hour"; }).value);
+              var minute = Number(parts.find(function (p) { return p.type === "minute"; }).value);
+              h = (hour === 24 ? 0 : hour) + minute / 60;
+            } catch (err) {
+              var d2 = new Date();
+              h = d2.getHours() + d2.getMinutes() / 60;
+            }
+          }
+          document.documentElement.dataset.theme = h >= 4.5 && h < 17 ? "light" : "dark";
+        } catch (err) {}
+      })();
+    </script>
+    <title>Diego Martinez — Tools people use every day</title>
+    <meta
+      name="description"
+      content="Diego Martinez turns messy workflows into production software—automation, integrations, internal tools. 40+ systems · 15,000+ users · remote · full-time or contract."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Diego Martinez — Tools people use every day" />
+    <meta
+      property="og:description"
+      content="Turns messy workflows into production software—automation, integrations, internal tools. 40+ systems · 15,000+ users · remote · full-time or contract."
+    />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Diego Martinez — Tools people use every day" />
+    <meta
+      name="twitter:description"
+      content="Turns messy workflows into production software—automation, integrations, internal tools. 40+ systems · 15,000+ users · remote · full-time or contract."
+    />
+    <meta name="twitter:image" content="assets/og-image.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=49" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Diego Martinez
+          <span class="brand-role">Ops software · automation · integrations</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="portfolio.html">Work</a>
+          <a href="resume.html">Resume</a>
+          <a href="approach.html">How I Think</a>
+          <a class="nav-cta" href="contact.html">Contact</a>
+          <label class="theme-control">
+            <span class="sr-only">Theme</span>
+            <select id="theme-mode" aria-label="Color theme">
+              <option value="auto">Dark/Light Mode</option>
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </label>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero-pin">
+      <section class="hero" data-bg="skyclock-day" data-tone="light">
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-base"></div>
+          <div class="hero-scene" id="hero-scene"></div>
+          <div class="hero-grain"></div>
+        </div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Automation · integrations · internal tools</p>
+          <h1 class="hero-brand hero-headline">
+            I turn messy workflows into tools people use every day.
+          </h1>
+          <p class="hero-line" id="hero-line">
+            Sole architect of 40+ systems used by 15,000+ people—still shipping. Customer-service roots, psychology training, production engineering.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="portfolio.html">See 40+ production systems</a>
+            <a class="btn btn-ghost" href="contact.html">Email me the role</a>
+          </div>
+        </div>
+        <div class="hero-sky-meta" id="hero-sky-meta" hidden>
+          <p class="hero-clock" id="hero-clock"></p>
+          <p class="hero-sky-hint">Sky follows your time.</p>
+          <label class="hero-tz-label" for="hero-tz">
+            <span class="hero-tz-caption">Timezone</span>
+            <select id="hero-tz" class="hero-tz-select" aria-label="Choose timezone for sky phase"></select>
+          </label>
+        </div>
+      </section>
+      </div>
+
+      <section class="section-tight">
+        <div class="container">
+          <div class="proof-grid reveal">
+            <div class="proof-item">
+              <div class="proof-num">Sole owner</div>
+              <div class="proof-label">Architect of an org’s production tech stack</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">40+</div>
+              <div class="proof-label">Production systems still in daily use</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">15,000+</div>
+              <div class="proof-label">People who’ve used systems I’ve shipped</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">4+ yrs</div>
+              <div class="proof-label">Inventing, shipping, and owning ops software</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="container">
+          <div class="section-head reveal" style="margin-bottom: 1rem">
+            <span class="eyebrow">Also on the record</span>
+            <h2 class="section-title" style="font-size: clamp(1.35rem, 2.5vw, 1.75rem)">Results under real pressure</h2>
+          </div>
+          <div class="proof-grid reveal">
+            <div class="proof-item">
+              <div class="proof-num">+50%</div>
+              <div class="proof-label">Amazon — exporting throughput 4.2 → 6.3 units/sec in under two weeks</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">−28%</div>
+              <div class="proof-label">PRB — labor share cut with a forecasting model from scheduling data</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">+34%</div>
+              <div class="proof-label">PRB — sales up while holding coverage</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-num">PII</div>
+              <div class="proof-label">Trusted with sensitive records — NYS DOL claims + production CRM/LMS data</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-tight presence">
+        <div class="container presence-row reveal">
+          <figure class="presence-photo">
+            <img
+              src="assets/diego-portrait.jpg"
+              alt="Diego Martinez in a suit, smiling"
+              width="1400"
+              height="1530"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div class="presence-copy">
+            <span class="eyebrow">Who you’re hiring</span>
+            <h2 class="section-title">One owner who can hear the need and ship the fix</h2>
+            <p class="section-lead">
+              Years in customer service taught me how stakeholders talk when they’re stuck. Psychology taught me why tools fail people. Engineering is how I close the loop—and own it after launch.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Selected work</span>
+            <h2 class="section-title">Proof, not promises</h2>
+            <p class="section-lead">
+              Intake that becomes trusted records. Check-in that works at the door. Automation under load. A sample from systems still in daily use—filter by domain, language, or concept.
+            </p>
+          </div>
+          <div id="featured-row" class="featured-row reveal"></div>
+          <p style="margin-top: 1.75rem" class="reveal">
+            <a class="btn btn-sea" href="portfolio.html">Browse all 40+ systems</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="section section-sea">
+        <div class="container reveal">
+          <span class="eyebrow" style="color: var(--signal-soft)">How I Think</span>
+          <h2 class="section-title" style="color: inherit">If people keep “misusing” the system, the system is wrong.</h2>
+          <p class="section-lead" style="color: rgba(255, 255, 255, 0.85)">
+            That’s how I think about every build. Safety and simplicity over cleverness. Design for tired humans. Customer service instincts for every stakeholder conversation.
+          </p>
+          <p style="margin-top: 1.75rem">
+            <a class="btn btn-primary" href="approach.html">Read How I Think</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Fit</span>
+            <h2 class="section-title">What hiring teams need to know</h2>
+          </div>
+          <dl class="faq-list reveal">
+            <div class="faq-item">
+              <dt>What roles are you targeting?</dt>
+              <dd>
+                Any seat where inventing process and shipping production software is the core job—automation engineer, integrations / systems engineer, ops tooling, technical ownership, IT leadership, TPM-style build-and-own. Director of IT is my current scope proof, not a title ceiling. Remote preferred. Full-time or contract.
+              </dd>
+            </div>
+            <div class="faq-item">
+              <dt>Does this only fit education or nonprofit?</dt>
+              <dd>
+                No. The transferable patterns are CRM truth, intake → trusted records, event/ops tooling, platform bridges, and automation under load. A STEM research org is where I’ve proven depth—not the only market I can serve.
+              </dd>
+            </div>
+            <div class="faq-item">
+              <dt>How are you different from a typical engineer?</dt>
+              <dd>
+                A large customer-service background plus Psychology means I hear stakeholders clearly and design for tired, non-technical users. Then I invent the missing process and ship something staff keep running—not a demo that dies after a pilot.
+              </dd>
+            </div>
+            <div class="faq-item">
+              <dt>How do we start?</dt>
+              <dd>
+                Email the role—or the painful workflow—plus tools in play and timeline. I’ll tell you quickly whether I’m the right hire, and what I’d need to move fast.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section section-sea">
+        <div class="container reveal">
+          <span class="eyebrow" style="color: var(--signal-soft)">Next step</span>
+          <h2 class="section-title" style="color: inherit">Got a painful workflow? Send it.</h2>
+          <p class="section-lead" style="color: rgba(255, 255, 255, 0.85)">
+            Role or stuck process, tools in play, timeline. I’ll tell you quickly if I’m the right hire. Remote preferred. Full-time or contract.
+          </p>
+          <p style="margin-top: 1.75rem">
+            <a class="btn btn-primary" href="contact.html">Email me the role</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Diego Martinez · invents process · ships systems</span>
+        <div class="footer-links">
+          <a href="mailto:diegofarela11@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/diego-martinez-9a47701b2/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="assets/Diego_Martinez_Resume.pdf" download>Resume PDF</a>
+          <button type="button" class="share-site" data-share-site>Share this site</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/env.js?v=1"></script>
+    <script src="js/projects.js?v=35"></script>
+    <script src="js/main.js?v=38"></script>
+  </body>
+</html>

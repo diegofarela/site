@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("portfolioThemeModeV1") || "auto";
+          if (mode === "light" || mode === "dark") {
+            document.documentElement.dataset.theme = mode;
+            return;
+          }
+          var tz = localStorage.getItem("portfolioHeroTzV1") || "local";
+          var h;
+          if (!tz || tz === "local") {
+            var d = new Date();
+            h = d.getHours() + d.getMinutes() / 60;
+          } else {
+            try {
+              var parts = new Intl.DateTimeFormat("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hourCycle: "h23",
+                timeZone: tz
+              }).formatToParts(new Date());
+              var hour = Number(parts.find(function (p) { return p.type === "hour"; }).value);
+              var minute = Number(parts.find(function (p) { return p.type === "minute"; }).value);
+              h = (hour === 24 ? 0 : hour) + minute / 60;
+            } catch (err) {
+              var d2 = new Date();
+              h = d2.getHours() + d2.getMinutes() / 60;
+            }
+          }
+          document.documentElement.dataset.theme = h >= 4.5 && h < 17 ? "light" : "dark";
+        } catch (err) {}
+      })();
+    </script>
+    <title>Resume — Diego Martinez</title>
+    <meta
+      name="description"
+      content="Diego Martinez — invents missing processes and ships production automation, integrations, and ops tooling. 40+ systems · 15,000+ users. Remote. Full-time or contract."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Resume — Diego Martinez" />
+    <meta
+      property="og:description"
+      content="Invents missing processes; ships production automation, integrations, and ops tooling. 40+ systems · 15,000+ users. Remote. Full-time or contract."
+    />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Resume — Diego Martinez" />
+    <meta
+      name="twitter:description"
+      content="Invents missing processes; ships production automation, integrations, and ops tooling. 40+ systems · 15,000+ users. Remote. Full-time or contract."
+    />
+    <meta name="twitter:image" content="assets/og-image.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=49" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Diego Martinez
+          <span class="brand-role">Ops software · automation · integrations</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Work</a>
+          <a href="resume.html" aria-current="page">Resume</a>
+          <a href="approach.html">How I Think</a>
+          <a class="nav-cta" href="contact.html">Contact</a>
+          <label class="theme-control">
+            <span class="sr-only">Theme</span>
+            <select id="theme-mode" aria-label="Color theme">
+              <option value="auto">Dark/Light Mode</option>
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </label>
+
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <span class="eyebrow">Resume</span>
+          <h1>Diego Martinez</h1>
+          <p>
+            Invents missing processes · ships production automation, integrations &amp; ops tooling · Remote ·
+            <a href="mailto:diegofarela11@gmail.com">diegofarela11@gmail.com</a> ·
+            <a href="tel:+15302207907">(530) 220-7907</a>
+          </p>
+          <div class="download-row">
+            <a class="btn btn-primary" href="assets/Diego_Martinez_Resume.pdf" download>Download PDF</a>
+            <a class="btn btn-ghost" href="assets/Diego_Martinez_Resume.docx" download>Download DOCX</a>
+            <a class="btn btn-sea" href="https://www.linkedin.com/in/diego-martinez-9a47701b2/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-ghost" href="portfolio.html">Work portfolio</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container resume-layout">
+          <aside class="resume-side reveal">
+            <h2>Summary</h2>
+            <p style="margin: 0 0 1.25rem; color: var(--ink-soft); font-size: 0.92rem">
+              I invent the process when it doesn’t exist—then ship the automation, integrations, and internal tools teams run every day. Sole architect of 40+ production systems used by 15,000+ people; still own them after go-live. Trusted with sensitive PII. Remote; full-time or contract.
+            </p>
+
+            <h2>Selected impact</h2>
+            <ul>
+              <li>40+ systems in daily production use</li>
+              <li>15,000+ people on systems I shipped</li>
+              <li>Amazon: +50% area throughput in &lt;2 weeks</li>
+              <li>PRB: −28% labor share; +34% sales</li>
+            </ul>
+
+            <h2 style="margin-top: 1.5rem">Core skills</h2>
+            <ul>
+              <li><strong>Build:</strong> JavaScript, Python, SQL, HTML/CSS, FastAPI, React, Docker</li>
+              <li><strong>Integrate:</strong> REST APIs, webhooks, HubSpot, Canvas LMS, Postgres/MySQL</li>
+              <li><strong>Automate:</strong> Workflow orchestration, intake→CRM, event ops, LMS bridges, data hygiene</li>
+              <li><strong>Operate:</strong> Dashboards, docs/SOPs, helpdesk ownership, production support</li>
+            </ul>
+
+            <h2 style="margin-top: 1.5rem">Education &amp; certs</h2>
+            <ul>
+              <li>UC Davis — B.A. Psychology; coursework in Computer &amp; Data Science (2019–2023)</li>
+              <li>Google Advanced Data Analytics Certificate (2023)</li>
+              <li>Google Data Analytics Certificate (2022)</li>
+              <li>Technical Support Fundamentals (Google)</li>
+            </ul>
+          </aside>
+
+          <div>
+            <article class="job reveal">
+              <h3 class="job-role">Director of Information Technology</h3>
+              <p class="job-org">Aspiring Scholars Directed Research Program (ASDRP)</p>
+              <p class="job-meta">Fremont, CA (Remote) · February 2022 – Present · Scope proof, not a title ceiling</p>
+              <ul>
+                <li>Sole architect of 40+ production systems (CRM sync, intake automation, secure QR check-in, LMS↔CRM bridges, public site)—requirements → ship → support; still owned in daily use by 15,000+ people.</li>
+                <li>Built bidirectional CRM–database sync with webhook-driven updates, change logging, and email-delivery monitoring so advisors and admins share one truth and outbound mail lands on real contacts.</li>
+                <li>Automated admissions and mission-critical event workflows (Orientation, Lab Safety, Core Trainings, Blitz Talks, Expo): calculator-integrated registration, guarded contact creation, HubSpot sync, attendance validation, and live-whitelist QR check-in at the door.</li>
+                <li>Shipped LMS↔CRM bridge suite: Canvas provisioning/enrollment, pre-work and grade sync, completion webhooks, automated rosters, certificate generation, and financial-aid reminders—cutting term-start manual surgery.</li>
+                <li>Rebuilt asdrp.org end-to-end; integrated HubSpot APIs for reporting and property updates; analyzed 2019–2024 admissions data to guide recruitment decisions.</li>
+                <li>Author technical docs and SOPs; own helpdesk triage across website, dashboards, and Canvas so sole-owner systems stay operable after launch—not fragile demos.</li>
+              </ul>
+            </article>
+
+            <article class="job reveal">
+              <h3 class="job-role">Data Analyst (Contract)</h3>
+              <p class="job-org">Upwork</p>
+              <p class="job-meta">Davis, CA (Remote) · 2022 – 2023</p>
+              <ul>
+                <li>Delivered contracted analytics for housing and ops clients: collected, cleaned, and joined multi-source datasets in Excel and SQL; produced KPI/operational reports that drove product and process decisions.</li>
+              </ul>
+            </article>
+
+            <article class="job reveal">
+              <h3 class="job-role">Shift Manager</h3>
+              <p class="job-org">PRB Management LLC</p>
+              <p class="job-meta">Davis, CA · October 2021 – June 2022</p>
+              <ul>
+                <li>Built a labor-forecasting model from historical scheduling data that cut per-employee labor share by 28% when staffing shifts.</li>
+                <li>Ran recurring sales, labor, and shift-performance reporting; increased sales by 34% while holding coverage.</li>
+              </ul>
+            </article>
+
+            <article class="job reveal">
+              <h3 class="job-role">Area Manager Intern</h3>
+              <p class="job-org">Amazon</p>
+              <p class="job-meta">Orlando, FL · June 2021 – July 2021</p>
+              <ul>
+                <li>Raised exporting-area throughput from 4.2 to 6.3 units/sec (+50%) in under two weeks via data-driven quality and process changes; presented findings with peer interns under an L5 Learning Manager.</li>
+              </ul>
+            </article>
+
+            <article class="job reveal">
+              <h3 class="job-role">Unemployment Claims Specialist</h3>
+              <p class="job-org">AnswerNet (New York State Department of Labor)</p>
+              <p class="job-meta">Albany, NY · August 2020 – October 2020</p>
+              <ul>
+                <li>Processed high-volume unemployment claims with sensitive PII under strict confidentiality; updated data-management documentation and troubleshot system issues on regulated state systems.</li>
+              </ul>
+            </article>
+
+            <article class="job reveal">
+              <h3 class="job-role">Selected systems shipped</h3>
+              <p class="job-meta" style="margin-bottom: 0.85rem">Production patterns transferable beyond education</p>
+              <ul>
+                <li>Bidirectional CRM–DB sync · Intake → trusted CRM records · Live-whitelist QR check-in · Canvas↔HubSpot provisioning &amp; completion · Certificate &amp; roster automation · Durable webhook pipelines · Public site + link redirector</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Diego Martinez</span>
+        <div class="footer-links">
+          <a href="portfolio.html">Work</a>
+          <a href="contact.html">Contact</a>
+          <button type="button" class="share-site" data-share-site>Share this site</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/env.js?v=1"></script>
+    <script src="js/main.js?v=38"></script>
+  </body>
+</html>

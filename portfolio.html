@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("portfolioThemeModeV1") || "auto";
+          if (mode === "light" || mode === "dark") {
+            document.documentElement.dataset.theme = mode;
+            return;
+          }
+          var tz = localStorage.getItem("portfolioHeroTzV1") || "local";
+          var h;
+          if (!tz || tz === "local") {
+            var d = new Date();
+            h = d.getHours() + d.getMinutes() / 60;
+          } else {
+            try {
+              var parts = new Intl.DateTimeFormat("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hourCycle: "h23",
+                timeZone: tz
+              }).formatToParts(new Date());
+              var hour = Number(parts.find(function (p) { return p.type === "hour"; }).value);
+              var minute = Number(parts.find(function (p) { return p.type === "minute"; }).value);
+              h = (hour === 24 ? 0 : hour) + minute / 60;
+            } catch (err) {
+              var d2 = new Date();
+              h = d2.getHours() + d2.getMinutes() / 60;
+            }
+          }
+          document.documentElement.dataset.theme = h >= 4.5 && h < 17 ? "light" : "dark";
+        } catch (err) {}
+      })();
+    </script>
+    <title>Work — Diego Martinez · 40+ production systems</title>
+    <meta
+      name="description"
+      content="40+ production systems Diego Martinez designed and shipped: CRM sync, intake, QR check-in, LMS bridges, automation—still in day-to-day use."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Work — Diego Martinez · 40+ production systems" />
+    <meta
+      property="og:description"
+      content="40+ production systems Diego Martinez designed and shipped: CRM sync, intake, QR check-in, LMS bridges, automation—still in day-to-day use."
+    />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Work — Diego Martinez · 40+ production systems" />
+    <meta
+      name="twitter:description"
+      content="40+ production systems Diego Martinez designed and shipped: CRM sync, intake, QR check-in, LMS bridges, automation—still in day-to-day use."
+    />
+    <meta name="twitter:image" content="assets/og-image.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css?v=49" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Diego Martinez
+          <span class="brand-role">Ops software · automation · integrations</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html" aria-current="page">Work</a>
+          <a href="resume.html">Resume</a>
+          <a href="approach.html">How I Think</a>
+          <a class="nav-cta" href="contact.html">Contact</a>
+          <label class="theme-control">
+            <span class="sr-only">Theme</span>
+            <select id="theme-mode" aria-label="Color theme">
+              <option value="auto">Dark/Light Mode</option>
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </label>
+
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="portfolio-intro-pin">
+      <section class="portfolio-intro" data-tone="dark">
+        <div class="portfolio-intro-visual" aria-hidden="true">
+          <div class="portfolio-intro-base"></div>
+          <div class="portfolio-intro-scene" id="portfolio-nexus-scene"></div>
+          <div class="portfolio-intro-grain"></div>
+        </div>
+        <div class="container portfolio-intro-content">
+          <span class="eyebrow">Work · 40+ systems in production</span>
+          <h1>Designed. Shipped. Still owned.</h1>
+          <p>
+            Production systems under real load—not demos. CRM sync, intake automation, event ops, platform bridges, data hygiene. Filter by domain, language, or concept. Featured work first; course and curiosity under Archive.
+          </p>
+          <p class="portfolio-proof-echo">
+            Also on the record: Amazon +50% throughput · PRB −28% labor share · +34% sales while holding coverage.
+          </p>
+          <div class="portfolio-intro-actions">
+            <a class="btn btn-primary" href="#filters">Browse the catalog</a>
+          </div>
+        </div>
+        <a class="portfolio-intro-scroll" href="#filters">
+          <span class="portfolio-intro-scroll-label">Filters &amp; work</span>
+          <span class="portfolio-intro-scroll-chevron" aria-hidden="true"></span>
+        </a>
+      </section>
+      </div>
+
+      <section class="section section-portfolio-work" id="portfolio-work">
+        <div class="container">
+          <div id="filters" class="filter-board" aria-label="Filter projects"></div>
+          <p id="filter-count" class="filter-count" aria-live="polite"></p>
+          <div id="project-grid" class="project-grid"></div>
+          <div class="portfolio-close reveal">
+            <span class="eyebrow">Next step</span>
+            <h2 class="section-title">If this is the work you need done—hire me</h2>
+            <p class="section-lead">
+              Tell me the role you’re filling, or the process that only works because someone remembers the workaround.
+            </p>
+            <p style="margin-top: 1.25rem">
+            <a class="btn btn-primary" href="contact.html">Email me the role</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      id="project-modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-panel">
+        <div id="modal-visual" class="modal-visual" aria-hidden="true"></div>
+        <div class="modal-body">
+          <button id="modal-close" class="modal-close" type="button" aria-label="Close project details">×</button>
+          <h2 id="modal-title" class="modal-title"></h2>
+          <p id="modal-impact" class="modal-impact"></p>
+          <p id="modal-detail" class="modal-detail"></p>
+          <div id="modal-tools" class="card-tools"></div>
+          <p style="margin-top: 1.25rem">
+            <a id="modal-link" class="btn btn-sea" href="#" target="_blank" rel="noopener" hidden>View related link</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Diego Martinez · 40+ production systems</span>
+        <div class="footer-links">
+          <a href="mailto:diegofarela11@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/diego-martinez-9a47701b2/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="resume.html">Resume</a>
+          <button type="button" class="share-site" data-share-site>Share this site</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/env.js?v=1"></script>
+    <script src="js/projects.js?v=35"></script>
+    <script src="js/main.js?v=38"></script>
+  </body>
+</html>
