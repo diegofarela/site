@@ -1,6 +1,6 @@
 # Diego Martinez — Portfolio Site
 
-Presentation-only personal site.
+Presentation-only personal site. Thank you for reading this!
 
 ## Run locally
 
